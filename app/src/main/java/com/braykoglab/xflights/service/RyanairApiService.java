@@ -29,7 +29,7 @@ public class RyanairApiService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        findCheapestFlights(new ApiRequest.ApiRequestBuilder().build());
+        findCheapestFlights(ApiRequest.builder().build());
         return Service.START_NOT_STICKY;
     }
 
