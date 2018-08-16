@@ -6,8 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/callRyanairApiService"
@@ -15,8 +14,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onClick"
-            android:text="call Ryanair-Api-Service">
-        </Button>
+            android:text="@string/rynair"></Button>
+
+        <Button
+            android:id="@+id/callLufthansaService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:text="@string/lufthansa" />
 
     </LinearLayout>
 

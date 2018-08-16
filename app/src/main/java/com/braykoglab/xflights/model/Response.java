@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class ApiResponse {
+public class Response {
 
     private List<Flight> oneWayFligths;
     private List<Flight> returnFligths;

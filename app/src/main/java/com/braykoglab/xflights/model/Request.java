@@ -9,7 +9,7 @@ import lombok.Builder;
 
 @Builder
 @AllArgsConstructor
-public class ApiRequest {
+public class Request {
     private String from;
     private String to;
     private Date flyOutFrom;
