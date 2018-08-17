@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">XFlights</string>
+    <string name="lufthansa">call Lufthansa-Service</string>
+    <string name="rynair">call Ryanair-Api-Service</string>
 </resources>

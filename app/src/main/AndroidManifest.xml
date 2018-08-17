@@ -17,9 +17,10 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".service.RyanairApiService"
+            android:name=".service.RyanairService"
             android:label="Ryanair Service" >
         </service>
+        <service android:name=".service.LufthansaService" />
     </application>
 
 </manifest>
