@@ -16,11 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".service.RyanairService"
-            android:label="Ryanair Service" >
-        </service>
+            android:label="Ryanair Service"></service>
         <service android:name=".service.LufthansaService" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
