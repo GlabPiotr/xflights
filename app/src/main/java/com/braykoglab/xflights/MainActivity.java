@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.braykoglab.xflights.configuration.Configuration;
 import com.braykoglab.xflights.connections.BaseServiceConnection;
 import com.braykoglab.xflights.connections.LufthansaServiceConnection;
 import com.braykoglab.xflights.connections.RyanairServiceConnection;
@@ -14,6 +15,8 @@ import com.braykoglab.xflights.service.RyanairService;
 import com.google.common.collect.ImmutableMap;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Configuration configuration;
 
     private final ImmutableMap<BaseServiceConnection, Class> serviceConnections = ImmutableMap.<BaseServiceConnection, Class>builder()
             .put(new RyanairServiceConnection(this), RyanairService.class)
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        configuration = new Configuration(this);
     }
 
     @Override

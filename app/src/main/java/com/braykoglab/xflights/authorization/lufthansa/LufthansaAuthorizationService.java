@@ -17,17 +17,16 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.braykoglab.xflights.configuration.Configuration.LUFTHANSA_AUTH_SERVICE_URL;
+import static com.braykoglab.xflights.configuration.Configuration.LUFTHANSA_CLIEND_ID;
+import static com.braykoglab.xflights.configuration.Configuration.LUFTHANSA_CLIENT_SECRET;
+import static com.braykoglab.xflights.configuration.Configuration.LUFTHANSA_GRANT_TYPE;
+
 public class LufthansaAuthorizationService implements AuthorizationService {
 
-    ///TODO: find out how to staightforward managed data in properties file
-    private static final String AUTH_SERVICE_URL = "https://api.lufthansa.com/v1/oauth/token";
     private static final String CLIENT_ID = "client_id";
     private static final String CLIENT_SECRET = "client_secret";
     private static final String GRANT_TYPE = "grant_type";
-
-    private static final String CLIENT_ID_VALUE = "n797fhe833g7ks9h6dbhnth7";
-    private static final String CLIENT_SECRET_VALUE = "GKwGCDYWHn";
-    private static final String GRANT_TYPE_VALUE = "client_credentials";
 
     private LufthansaAuthorizationToken lufthansaAuthorizationToken;
 
@@ -36,7 +35,7 @@ public class LufthansaAuthorizationService implements AuthorizationService {
 
         Disposable disp = Observable.create((ObservableOnSubscribe<LufthansaAuthorizationToken>) e -> {
             try {
-                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(AUTH_SERVICE_URL);
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(LUFTHANSA_AUTH_SERVICE_URL);
                 HttpEntity<?> entity = new HttpEntity<>(getParams(), getHeaders());
 
                 ResponseEntity<LufthansaAuthorizationToken> response = new RestTemplate()
@@ -61,9 +60,9 @@ public class LufthansaAuthorizationService implements AuthorizationService {
 
     public MultiValueMap<String, String> getParams() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add(CLIENT_ID, CLIENT_ID_VALUE);
-        params.add(CLIENT_SECRET, CLIENT_SECRET_VALUE);
-        params.add(GRANT_TYPE, GRANT_TYPE_VALUE);
+        params.add(CLIENT_ID, LUFTHANSA_CLIEND_ID);
+        params.add(CLIENT_SECRET, LUFTHANSA_CLIENT_SECRET);
+        params.add(GRANT_TYPE, LUFTHANSA_GRANT_TYPE);
         return params;
     }
 
