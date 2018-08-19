@@ -8,9 +8,12 @@ import com.braykoglab.xflights.authorization.lufthansa.LufthansaAuthorizationTok
 import com.braykoglab.xflights.model.Request;
 import com.braykoglab.xflights.model.Response;
 
+import io.reactivex.schedulers.Schedulers;
+
 public class LufthansaService extends BaseService {
 
     private LufthansaAuthorizationService lufthansaAuthorizationService;
+    LufthansaAuthorizationToken authorizationToken;
 
     public class LufthansaServiceBinder extends Binder {
         public LufthansaService getService() {
@@ -26,7 +29,7 @@ public class LufthansaService extends BaseService {
     public Response findCheapestFlights(Request request) {
         Toast.makeText(LufthansaService.this, "Calling Lufthansa Api...", Toast.LENGTH_SHORT).show();
 
-        LufthansaAuthorizationToken lufthansaAuthorizationToken = lufthansaAuthorizationService.getAuthorizationToken();
+        lufthansaAuthorizationService.getAuthorizationToken().subscribeOn(Schedulers.io()).subscribe(token -> authorizationToken = token);
 
         ///TODO: use authentication data and call simple endpoinr from lufthansa
 

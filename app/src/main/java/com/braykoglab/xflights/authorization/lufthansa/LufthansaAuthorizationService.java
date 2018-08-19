@@ -12,10 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 import static com.braykoglab.xflights.configuration.Configuration.LUFTHANSA_AUTH_SERVICE_URL;
 import static com.braykoglab.xflights.configuration.Configuration.LUFTHANSA_CLIEND_ID;
@@ -28,34 +24,16 @@ public class LufthansaAuthorizationService implements AuthorizationService {
     private static final String CLIENT_SECRET = "client_secret";
     private static final String GRANT_TYPE = "grant_type";
 
-    private LufthansaAuthorizationToken lufthansaAuthorizationToken;
+    public Observable<LufthansaAuthorizationToken> getAuthorizationToken() {
+        return Observable.create(e -> {
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(LUFTHANSA_AUTH_SERVICE_URL);
+            HttpEntity<?> entity = new HttpEntity<>(getParams(), getHeaders());
 
-    public LufthansaAuthorizationToken getAuthorizationToken() {
-        CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-        Disposable disp = Observable.create((ObservableOnSubscribe<LufthansaAuthorizationToken>) e -> {
-            try {
-                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(LUFTHANSA_AUTH_SERVICE_URL);
-                HttpEntity<?> entity = new HttpEntity<>(getParams(), getHeaders());
-
-                ResponseEntity<LufthansaAuthorizationToken> response = new RestTemplate()
-                        .postForEntity(builder.toUriString(),
-                                entity,
-                                LufthansaAuthorizationToken.class);
-
-                ///TODO: read more about subscribing
-                lufthansaAuthorizationToken = response.getBody();
-                e.onNext(lufthansaAuthorizationToken);
-            } catch (Exception ex) {
-                e.onError(ex);
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .subscribe(data -> lufthansaAuthorizationToken = data);
-
-        compositeDisposable.add(disp);
-
-        return lufthansaAuthorizationToken;
+            ResponseEntity<LufthansaAuthorizationToken> response = new RestTemplate().postForEntity(builder.toUriString(),
+                    entity,
+                    LufthansaAuthorizationToken.class);
+            e.onNext(response.getBody());
+        });
     }
 
     public MultiValueMap<String, String> getParams() {
