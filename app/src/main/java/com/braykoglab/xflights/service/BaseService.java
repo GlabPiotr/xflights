@@ -8,11 +8,13 @@ import android.support.annotation.Nullable;
 import com.braykoglab.xflights.model.Request;
 import com.braykoglab.xflights.model.Response;
 
+import java.io.IOException;
+
 public abstract class BaseService extends Service {
 
     protected IBinder binder;
 
-    public abstract Response findCheapestFlights(final Request request);
+    public abstract void findCheapestFlights(final Request request);
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {

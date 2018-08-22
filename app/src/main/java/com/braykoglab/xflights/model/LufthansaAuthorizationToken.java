@@ -1,4 +1,4 @@
-package com.braykoglab.xflights.authorization.lufthansa;
+package com.braykoglab.xflights.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -15,10 +15,9 @@ public class RyanairService extends BaseService {
         }
     }
 
-    public Response findCheapestFlights(final Request request) {
+    public void findCheapestFlights(final Request request) {
         Response response = new Response();
         Toast.makeText(RyanairService.this, "Calling Ryanair Api...", Toast.LENGTH_SHORT).show();
         // todo: call Ryanair api and build Response
-        return response;
     }
 }
